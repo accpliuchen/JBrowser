@@ -21,7 +21,44 @@ public class WebToolBar extends JToolBar implements HyperlinkListener{
         webBrowserPane.addHyperlinkListener(this);
 
         urlTextField=new JTextField(25);
-        
+        urlTextField.addActionListener( new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent event) {
+				try{
+					URL url=new URL(urlTextField.getText());
+					webBrowserPane.goToURL(url);
+
+				}catch(MalformedURLException urlException){
+					urlException.printStackTrace();
+				}
+			}
+		});
+
+
+        backButton = new JButton( new ImageIcon(getClass().getResource( "./images/back.gif" ) ) );
+        backButton.addActionListener(new ActionListener(){
+        	public void actionPerformed(ActionEvent event){
+        		URL url=webBrowserPane.back();
+
+        		urlTextField.setText(url.toString());
+        	}
+        });
+
+
+		
+		forwardButton = new JButton( new ImageIcon(getClass().getResource( "./images/forward.gif" ) ) );
+
+		forwardButton.addActionListener(new ActionListener(){
+        	public void actionPerformed(ActionEvent event){
+        		URL url=webBrowserPane.forward();
+
+        		urlTextField.setText(url.toString());
+        	}
+        });
+
+        add(backButton);
+        add(forwardButton);
         add(urlTextField);
 	}
 

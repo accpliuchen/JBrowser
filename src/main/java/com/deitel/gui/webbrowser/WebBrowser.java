@@ -26,6 +26,7 @@ public class WebBrowser extends JFrame {
 	public static void main(String args[]){
 		WebBrowser browser=new WebBrowser();
 		browser.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		browser.setSize(640,480);
 		browser.setVisible(true);
 	}
 }
